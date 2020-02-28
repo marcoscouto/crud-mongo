@@ -1,17 +1,26 @@
 package com.marcoscouto.crudmongo.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Document
-public class User {
+public class User implements Serializable {
 
     @Id
     private String id;
     private String name;
     private Integer age;
+
+    @DBRef(lazy = true)
+    @JsonIgnoreProperties("author")
+    private List<Post> posts = new ArrayList<>();
 
     public User() {
     }
@@ -44,6 +53,10 @@ public class User {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
     }
 
     @Override

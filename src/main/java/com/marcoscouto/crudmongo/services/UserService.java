@@ -33,7 +33,7 @@ public class UserService {
         User user = findById(id);
         if(user == null) return null;
         updateUser(user, newUser);
-        return user;
+        return userRepository.save(user);
     }
 
     private User updateUser(User user, User newUser){
