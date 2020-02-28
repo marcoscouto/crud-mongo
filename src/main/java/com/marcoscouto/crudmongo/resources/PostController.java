@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/posts")
-public class PostResource {
+public class PostController {
 
     @Autowired
     private PostService postService;
